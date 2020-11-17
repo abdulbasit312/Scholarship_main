@@ -1,0 +1,46 @@
+﻿@model IEnumerable<scholarship.Models.COLLEGE>
+     
+<div>
+    <h4>COLLEGE</h4>
+    <hr />
+    <table class="table">
+       <thead>
+           <tr>
+        <th>
+            @Html.DisplayNameFor(model=>model.COLLEGE_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME)
+        </th>       
+
+        <th>
+            @Html.DisplayNameFor(model => model.ADDRESS)
+        </th>
+        </tr>
+           </thead>
+   
+       <tbody>
+           @foreach (var item in Model)
+           {
+               <tr>
+                   <td>
+                       @Html.DisplayFor(Model => item.COLLEGE_ID)
+                   </td>
+                   <td>
+                       @Html.DisplayFor(Model => item.NAME)
+                   </td>
+                   <td>
+                       @Html.DisplayFor(Model => item.ADDRESS)
+                   </td>
+                   <td>
+                       @Html.ActionLink("Edit", "Edit_College", new { id = item.COLLEGE_ID })
+                       ||
+                       @Html.ActionLink("Delete", "Delete_College", new { id = item.COLLEGE_ID }, new {onclick=string.Format("return confirm('Delete Name: {0} and Location: {1}');",item.NAME,item.ADDRESS)})
+                   </td>
+               </tr>
+           }
+       </tbody>
+    </table>
+    @Html.ActionLink("Add A New College","Create")
+</div>
+

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="College.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="COLLEGE">
+          <Key>
+            <PropertyRef Name="COLLEGE_ID" />
+          </Key>
+          <Property Name="COLLEGE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="ADDRESS" Type="varchar2" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="STUDENT_ID" />
+          </Key>
+          <Property Name="STUDENT_ID" Type="varchar2" MaxLength="12" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="40" Nullable="false" />
+          <Property Name="COURSE" Type="varchar2" MaxLength="40" />
+          <Property Name="EDUCATIONAL" Type="varchar2" MaxLength="20" />
+          <Property Name="AGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="COLLEGE_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="M_NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="F_NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="ADDRESS" Type="varchar2" MaxLength="20" />
+          <Property Name="DOA" Type="date" />
+        </EntityType>
+        <Association Name="FK_NAME">
+          <End Role="COLLEGE" Type="Self.COLLEGE" Multiplicity="0..1" />
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLLEGE">
+              <PropertyRef Name="COLLEGE_ID" />
+            </Principal>
+            <Dependent Role="STUDENT">
+              <PropertyRef Name="COLLEGE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CollegeStoreContainer">
+          <EntitySet Name="COLLEGE" EntityType="Self.COLLEGE" Schema="ABDUL" store:Type="Tables" />
+          <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="ABDUL" store:Type="Tables" />
+          <AssociationSet Name="FK_NAME" Association="Self.FK_NAME">
+            <End Role="COLLEGE" EntitySet="COLLEGE" />
+            <End Role="STUDENT" EntitySet="STUDENT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="College" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="COLLEGE" EntityType="College.COLLEGE" />
+          <EntitySet Name="STUDENT" EntityType="College.STUDENT" />
+          <AssociationSet Name="FK_NAME" Association="College.FK_NAME">
+            <End Role="COLLEGE" EntitySet="COLLEGE" />
+            <End Role="STUDENT" EntitySet="STUDENT" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="COLLEGE">
+          <Key>
+            <PropertyRef Name="COLLEGE_ID" />
+          </Key>
+          <Property Name="COLLEGE_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="STUDENT" Relationship="College.FK_NAME" FromRole="COLLEGE" ToRole="STUDENT" />
+        </EntityType>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="STUDENT_ID" />
+          </Key>
+          <Property Name="STUDENT_ID" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="COURSE" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="EDUCATIONAL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AGE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DOB" Type="DateTime" />
+          <Property Name="COLLEGE_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="M_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="F_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DOA" Type="DateTime" />
+          <NavigationProperty Name="COLLEGE" Relationship="College.FK_NAME" FromRole="STUDENT" ToRole="COLLEGE" />
+        </EntityType>
+        <Association Name="FK_NAME">
+          <End Type="College.COLLEGE" Role="COLLEGE" Multiplicity="0..1" />
+          <End Type="College.STUDENT" Role="STUDENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COLLEGE">
+              <PropertyRef Name="COLLEGE_ID" />
+            </Principal>
+            <Dependent Role="STUDENT">
+              <PropertyRef Name="COLLEGE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CollegeStoreContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="COLLEGE">
+            <EntityTypeMapping TypeName="College.COLLEGE">
+              <MappingFragment StoreEntitySet="COLLEGE">
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="COLLEGE_ID" ColumnName="COLLEGE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STUDENT">
+            <EntityTypeMapping TypeName="College.STUDENT">
+              <MappingFragment StoreEntitySet="STUDENT">
+                <ScalarProperty Name="DOA" ColumnName="DOA" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="F_NAME" ColumnName="F_NAME" />
+                <ScalarProperty Name="M_NAME" ColumnName="M_NAME" />
+                <ScalarProperty Name="COLLEGE_ID" ColumnName="COLLEGE_ID" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="AGE" ColumnName="AGE" />
+                <ScalarProperty Name="EDUCATIONAL" ColumnName="EDUCATIONAL" />
+                <ScalarProperty Name="COURSE" ColumnName="COURSE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="STUDENT_ID" ColumnName="STUDENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

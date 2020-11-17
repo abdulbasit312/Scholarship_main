@@ -1,0 +1,87 @@
+﻿@model IEnumerable<scholarship.Models.STUDENT>
+
+<div>
+    <h4>STUDENT</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.STUDENT_ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.COURSE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EDUCATIONAL)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AGE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DOB)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.COLLEGE_ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.M_NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.F_NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ADDRESS)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(Model => item.STUDENT_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => item.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => item.COURSE)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => item.EDUCATIONAL)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => item.AGE)
+                </td>
+                <td>
+                    @{var a = item.DOB.ToString().Split(' ');}
+                @Html.DisplayFor(Model => a[0])
+            </td>
+            <td>
+                @Html.DisplayFor(Model => item.COLLEGE_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(Model => item.M_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(Model => item.F_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(Model => item.ADDRESS)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditStudent", new { id = item.STUDENT_ID })
+                ||
+                @Html.ActionLink("Delete", "Delete_College", new { id = item.COLLEGE_ID }, new { onclick = string.Format("return confirm('Delete Name: {0} and Location: {1}');", item.NAME, item.ADDRESS) })
+            </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    </div>
+
